@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ramesh ❣️ Varsha Wedding</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+body{
+  margin:0;
+  font-family:'Playfair Display',serif;
+  background:linear-gradient(135deg,#160016,#2b001b);
+  color:#fff;
+  text-align:center;
+}
+/* LOCK SCREEN */
+#lock{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+#lock h2{color:#ffd700;}
+#lock input{
+  padding:12px;
+  font-size:18px;
+  border-radius:25px;
+  border:none;
+  text-align:center;
+  outline:none;
+}
+#lock button{
+  margin-top:12px;
+  padding:12px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:25px;
+  background:linear-gradient(45deg,#ff4d6d,#ffd700);
+  cursor:pointer;
+}
+/* GALLERY */
+h1{color:#ffd700;margin-top:25px;}
+.date{color:#ffb703;margin-bottom:25px;}
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:15px;
+  padding:15px;
+}
+.card{
+  background:rgba(255,255,255,0.08);
+  border-radius:15px;
+  padding:6px;
+  box-shadow:0 0 15px rgba(255,215,0,0.2);
+  transition:0.3s;
+}
+.card:hover{transform:scale(1.05);}
+.card img{
+  width:100%;
+  border-radius:12px;
+  cursor:pointer;
+}
+.caption{
+  font-size:14px;
+  color:#ffe9a3;
+  margin-top:6px;
+}
+/* FULL VIEW */
+.viewer{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.95);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+}
+.viewer img{
+  max-width:92%;
+  max-height:92%;
+  border-radius:15px;
+}
+</style>
+</head>
+<body>
+
+<!-- Background Music -->
+<audio id="music" loop>
+  <source src="wedding-music.mp3" type="audio/mpeg">
+  आपका ब्राउज़र ऑडियो सपोर्ट नहीं करता।
+</audio>
+
+<!-- LOCK SCREEN -->
+<div id="lock">
+  <h2>🔒 Private Wedding Album</h2>
+  <p>Password डालें</p>
+  <input type="password" id="pass" placeholder="Password">
+  <button onclick="unlock()">Open Album</button>
+</div>
+
+<h1>Ramesh ❣️ Varsha</h1>
+<div class="date">विवाह तिथि • 06 जून 2025</div>
+
+<div class="gallery" id="gallery"></div>
+
+<div class="viewer" id="viewer" onclick="this.style.display='none'">
+  <img id="bigImg">
+</div>
+
+<script>
+function unlock(){
+  if(pass.value==="06/06/25"){
+    document.getElementById("lock").style.display="none";
+    music.play();
+  }else{
+    alert("गलत Password");
+  }
+}
+
+// Shayari for first 20 photos
+const shayari=[
+"तुम साथ हो तो हर लम्हा खास है।",
+"मेरी हर खुशी तुम्हारे नाम है।",
+"तुम्हें पाकर ज़िंदगी संवर गई।",
+"तुम मेरी दुआओं का जवाब हो।",
+"हर जन्म में तुम्हारा साथ चाहिए।",
+"तुम हो तो हर राह आसान है।",
+"मेरी कहानी तुम हो।",
+"तुम मेरी दुनिया हो।",
+"हमसफर तुम हो।",
+"तुमसे शुरू तुम पर खत्म।",
+"साथ तुम्हारा सबसे बड़ा तोहफा।",
+"तुम मेरी किस्मत हो।",
+"तुम संग हर सपना।",
+"तुम हो तो सब कुछ।",
+"दिल की हर धड़कन।",
+"तुम संग जीना।",
+"तुम मेरा सुकून।",
+"तुम ही सब कुछ।",
+"प्यार तुमसे।",
+"मेरी ज़िंदगी तुम।"
+];
+
+// Generate gallery 1 to 70 photos
+for(let i=1;i<=70;i++){
+  let card=document.createElement("div");
+  card.className="card";
+
+  let img=document.createElement("img");
+  img.src=i+".jpg"; // Same folder
+  img.onclick=()=>{viewer.style.display="flex";bigImg.src=img.src;}
+
+  let cap=document.createElement("div");
+  cap.className="caption";
+  cap.innerText = i<=20 ? shayari[i-1] : "Ramesh ❣️ Varsha";
+
+  card.appendChild(img);
+  card.appendChild(cap);
+  gallery.appendChild(card);
+}
+</script>
+
+</body>
+</html>
